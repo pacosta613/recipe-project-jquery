@@ -18,14 +18,6 @@ class Recipe < ActiveRecord::Base
       end
     end
   end
-
-  #def ingredients=(ingredients_array)
-  #  ingredients_array.each do |ingredient|
-  #    if ingredient != ""
-  #      new_ingredient = Ingredient.find_or_create_by_id(ingredient)
-  #      self.ingredients.build(:ingredient => new_ingredient)
-  #    end
-  #  end
-  #end
+  
 end
 
