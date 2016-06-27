@@ -1,13 +1,13 @@
 <h1><%= @recipe.name.capitalize %></h1>
 
 <h3>Ingredients:</h3>
+<%= link_to "Load Ingredients", recipe_ingredients_path(@recipe), :class => "load_ingredients", :remote => true %>
 
-<ol>
-  <% @recipe.ingredients.each do |ingredient| %>
-    <li><%= ingredient.name %></li><br>
-  <% end %>
-</ol>
-
+<div class="ingredients">
+  <ol>
+    
+  </ol>
+</div>
 
 
 <%= button_to "Add Ingredients", new_recipe_ingredient_path(@recipe), method: 'get' %>
@@ -25,11 +25,8 @@
 <% end %>
 
 <h2>Comments</h2>
-<!--% if !@recipe.comments.empty? %-->
+<ol>
   <% @recipe.comments.each do |comment| %>
-    
-      <p>
-        <%= comment.user.email %>:</br> <%= comment.content %>
-      </p>
-  <!--% end %-->
-<% end %>
+    <li><%= comment.user.email %> -  <%= comment.content %></li>    
+  <% end %>
+</ol>

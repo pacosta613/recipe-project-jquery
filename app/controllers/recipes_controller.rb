@@ -21,8 +21,11 @@ class RecipesController < ApplicationController
     end
   end
 
-  def show    
+  def show
     @comment = Comment.new
+
+    #@recipe = @recipe.ingredients
+    #render 'recipes/show', layout: false
   end
 
   def edit
