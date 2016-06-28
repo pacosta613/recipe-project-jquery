@@ -27,3 +27,9 @@
   //  event.preventDefault();
  // })
 //})
+
+$(function(){
+  $("#new_ingredient").on("submit", function(e){
+    alert("added!")
+  })
+});

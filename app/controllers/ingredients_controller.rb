@@ -3,6 +3,7 @@ class IngredientsController < ApplicationController
 
   def index
     #binding.pry
+
     @ingredients = @recipe.ingredients
 
     #render layout: false
@@ -19,7 +20,7 @@ class IngredientsController < ApplicationController
 
   def create
     @ingredient = @recipe.ingredients.create(ingredient_params)
-    
+
     redirect_to recipe_path(@recipe)
   end
 
