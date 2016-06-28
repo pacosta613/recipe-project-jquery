@@ -11,4 +11,7 @@ Rails.application.routes.draw do
     resources :comments
   end
   resources :comments
+
+  get '/users', to: 'users#index'
+  resources :users
 end

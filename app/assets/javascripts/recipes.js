@@ -28,8 +28,21 @@
  // })
 //})
 
-$(function(){
-  $("#new_ingredient").on("submit", function(e){
-    alert("added!")
-  })
-});
+//$(function(){
+//
+//  $("#new_ingredient").on("submit", function(e){
+//
+//    $.ajax({
+//      url: this.action,
+//      type: ($("input[name='_method']").val() || this.method),
+//      success: function(response){
+//        var $ol = $("ingredients ol");
+//        $ol.append(response);
+//      }
+//    });
+//    console.log(data)
+//    $("input#ingredient_name").val('');
+//    e.preventDefault();
+//  })
+
+//});

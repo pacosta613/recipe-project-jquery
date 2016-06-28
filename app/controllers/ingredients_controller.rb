@@ -20,7 +20,7 @@ class IngredientsController < ApplicationController
 
   def create
     @ingredient = @recipe.ingredients.create(ingredient_params)
-
+    binding.pry
     redirect_to recipe_path(@recipe)
   end
 
