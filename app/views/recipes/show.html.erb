@@ -2,15 +2,17 @@
 
 <h3>Ingredients:</h3>
 <%= link_to "Load Ingredients", recipe_ingredients_path(@recipe), :class => "load_ingredients", :remote => true %>
+<!--%= render 'ingredients/ingredients' %-->
 
 <div class="ingredients">
   <ol>
     
   </ol>
 </div>
+<%= render 'ingredients/new' %><br>
 
 
-<%= button_to "Add Ingredients", new_recipe_ingredient_path(@recipe), method: 'get' %>
+<!--%= button_to "Add Ingredients", new_recipe_ingredient_path(@recipe), method: 'get' %-->
 <%= button_to "Edit Recipe", edit_recipe_path(@recipe), method: 'get' %>  
 <%= button_to "Delete Recipe", "/recipes/#{@recipe.id}", method: 'delete' %>
 

@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :find_recipes, only: [:index]
+  #before_action :find_recipes, only: [:index]
   before_action :find_recipe, only: [:show, :edit, :update, :destroy]
   
   def index
@@ -22,9 +22,11 @@ class RecipesController < ApplicationController
   end
 
   def show
+    #binding.pry
     @comment = Comment.new
 
-    #@recipe = @recipe.ingredients
+    @ingredients = @recipe.ingredients
+    @ingredient = @recipe.ingredients.build
     #render 'recipes/show', layout: false
   end
 

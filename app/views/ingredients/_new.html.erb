@@ -1,0 +1,6 @@
+<%= form_for([@recipe, @ingredient], :remote => true) do |r| %>
+  <%= r.label :name %><br>
+  <%= r.text_field :name %>
+
+  <%= r.submit "Add Ingredient" %>
+<% end %>
