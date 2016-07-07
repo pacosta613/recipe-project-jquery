@@ -18,6 +18,9 @@ class Recipe < ActiveRecord::Base
       end
     end
   end
+
+  def self.most_popular
+    Recipe.order("comments_count desc" ).limit(2)
+  end
   
 end
-

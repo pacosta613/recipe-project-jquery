@@ -1,16 +1,19 @@
 class IngredientsController < ApplicationController
-  before_action :find_recipe
+  before_action :find_recipe, except: [:index]
 
   def index
-    #binding.pry
+    if params[:recipe_id]
+      @recipe = Recipe.find(params[:recipe_id])
+      @ingredients = @recipe.ingredients
 
-    @ingredients = @recipe.ingredients
-
+      respond_to do |format|
+        format.html {render :index}
+        format.js {render 'index.js'}
+      end
+    else
     #render layout: false
     #render :json => @ingredients
-    respond_to do |format|
-      format.html {render :index, :layout => false}
-      format.js {render 'index.js', :layout => false}
+      @ingredients = Ingredient.all 
     end
   end
   
@@ -20,11 +23,13 @@ class IngredientsController < ApplicationController
 
   def create
     @ingredient = @recipe.ingredients.create(ingredient_params)
-    binding.pry
-    redirect_to recipe_path(@recipe)
-  end
+    if @ingredient.save
 
-  def edit
+      redirect_to recipe_path(@recipe)
+    else
+      flash.now[:alert] = @ingredient.errors.full_messages
+      render :new
+    end
   end
 
   private

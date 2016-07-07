@@ -10,8 +10,6 @@ Rails.application.routes.draw do
     resources :ingredients
     resources :comments
   end
-  resources :comments
-
-  get '/users', to: 'users#index'
-  resources :users
+  resources :comments, only: [:index]
+  resources :ingredients, only: [:index, :new]
 end

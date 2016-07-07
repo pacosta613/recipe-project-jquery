@@ -4,6 +4,7 @@ class RecipesController < ApplicationController
   
   def index
     @recipes = Recipe.all
+    @recipe = Recipe.all.most_popular
   end
 
   def new
@@ -16,15 +17,15 @@ class RecipesController < ApplicationController
 
       redirect_to @recipe
     else
-      flash[:alert] = "Re-enter recipe name"
-      render 'new'
+      flash.now[:alert] = @recipe.errors.full_messages
+      render :new
     end
   end
 
   def show
     #binding.pry
     @comment = Comment.new
-
+    @comments = @recipe.comments
     @ingredients = @recipe.ingredients
     @ingredient = Ingredient.new
 
@@ -42,7 +43,7 @@ class RecipesController < ApplicationController
 
       redirect_to @recipe
     else
-      render 'edit'
+      render :edit
     end
   end
 
