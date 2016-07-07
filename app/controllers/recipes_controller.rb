@@ -25,9 +25,9 @@ class RecipesController < ApplicationController
   def show
     #binding.pry
     @comment = Comment.new
+    @ingredient = Ingredient.new
     @comments = @recipe.comments
     @ingredients = @recipe.ingredients
-    @ingredient = Ingredient.new
 
     respond_to do |format|
       format.html {render :show}

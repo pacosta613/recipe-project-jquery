@@ -1,16 +1,31 @@
-//$(document).ready(function(){
-//  attachFunctions();
-//});
+$(document).ready(function(){
+  loadIngredients();
+  loadComments();
+});
 
-//function attachFunctions(){
- // $('#load_ingredients').on('click', function(){
- //   loadIngredients();
- // });
-  //$('#new_ingredient').on('submit', function(){
-  //  addIngredients();
-  //});
-//};
+var loadIngredients = function(){
+  $("a.load_ingredients").on("click", function(e){
+    //debugger
+    e.preventDefault();
+    $.ajax({
+      method: 'Get',
+      url: this.href,
+      dataType: 'JSON'
+    }).success(function(){
+      $("div.ingredients").html(response)
+    });
+  });
+};
 
-//function loadIngredients(event) {
-//  event.preventDefault()
-//};
+var loadComments = function(){
+  $("a.load_comments").on("click", function(e){
+    e.preventDefault();
+    $.ajax({
+      method: 'Get',
+      url: this.href,
+      dataType: 'JSON'
+    }).success(function(){
+      $("div.comments").html(response)
+    });
+  });
+};

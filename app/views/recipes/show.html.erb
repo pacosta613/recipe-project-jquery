@@ -2,7 +2,7 @@
 
 <h3>Ingredients:</h3>
 
-<p><%= link_to "Load Ingredients", recipe_ingredients_path(@recipe), :class => "load_ingredients" %></p>
+<p><%= link_to "Load Ingredients", recipe_ingredients_path(@recipe), :class => "load_ingredients", remote: true %></p>
 <!--%= render 'ingredients/ingredients' %-->
 
 <div class="ingredients">
@@ -19,4 +19,7 @@
 <h2>Comments: </h2>
 
 <!--%= render 'comments/comments' %-->
-<p><%= link_to "Load Comments", recipe_comments_path(@recipe), :class => "load_comments" %></p>
+<p><%= link_to "Load Comments", recipe_comments_path(@recipe), :class => "load_comments", remote: true %></p>
+
+<div class="comments">
+</div><br>
