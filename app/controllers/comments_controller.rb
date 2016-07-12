@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :find_recipe
+  before_action :find_recipe, except: [:index]
 
   def index
     if params[:recipe_id]
@@ -7,8 +7,8 @@ class CommentsController < ApplicationController
       @comments = @recipe.comments
 
       respond_to do |format|
-        format.html {render :index}
-        format.js {render :index}
+        format.html {render 'index.html'}
+        format.js {render 'index.js'}
       end 
     else
       @comments = Comment.all 

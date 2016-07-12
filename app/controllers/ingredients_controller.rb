@@ -8,7 +8,7 @@ class IngredientsController < ApplicationController
 
       respond_to do |format|
         format.html {render :index}
-        format.js {render 'index.js'}
+        format.js {render 'index.js', :layout => false}
       end
     else
     #render layout: false
@@ -27,15 +27,16 @@ class IngredientsController < ApplicationController
 
       redirect_to recipe_path(@recipe)
     else
-      flash.now[:alert] = @ingredient.errors.full_messages
-      render :new
+      flash[:alert] = @ingredient.errors.full_messages
+      
+      redirect_to new_recipe_ingredient_path
     end
   end
 
   private
 
   def ingredient_params
-    params.require(:ingredient).permit(:name, :recipe_id)
+    params.require(:ingredient).permit(:name, :recipe_id, :ingredient_ids => [])
   end
 
   def find_recipe
