@@ -5,20 +5,20 @@ $(document).ready(function(){
   new_comments();
 });
 
-function Recipe(id, name, ingredients){
-  this.id = id 
-  this.name = name 
-  this.ingredients = ingredients
-};
-
 var loadIngredients = function(){
   $("a.load_ingredients").on("click", function(e){
     //debugger
     e.preventDefault();
 
     $.ajax({
+      method: 'GET',
       url: this.href,
-      dataType: 'script'
+      dataType: 'json'
+    }).done(function(response){
+      for (var i = 0; i < response.length; i++) {
+        
+        $("div.ingredients").html(response[i]["name"] )     
+      }
     });
   });
 };

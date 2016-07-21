@@ -8,11 +8,9 @@ class IngredientsController < ApplicationController
 
       respond_to do |format|
         format.html {render :index}
-        format.js {render 'index.js', :layout => false}
+        format.js {render json: @ingredients}
       end
     else
-    #render layout: false
-    #render :json => @ingredients
       @ingredients = Ingredient.all 
     end
   end
@@ -25,7 +23,7 @@ class IngredientsController < ApplicationController
     @ingredient = @recipe.ingredients.create(ingredient_params)
     if @ingredient.save
 
-      redirect_to recipe_path(@recipe)
+      render json: @ingredient, status: 201
     else
       flash[:alert] = @ingredient.errors.full_messages
       
@@ -40,7 +38,7 @@ class IngredientsController < ApplicationController
   end
 
   def find_recipe
-    @recipe = Recipe.find(params[:recipe_id])
+    @recipe = Recipe.find_by(params[:recipe_id])
   end
 
 end

@@ -23,7 +23,7 @@ class CommentsController < ApplicationController
     @comment = Comment.create(comment_params)
     if @comment.save
 
-      redirect_to recipe_path(@comment.recipe)
+      render json: @comment, status: 201
     else
       flash[:alert] = @comment.errors.full_messages
 
