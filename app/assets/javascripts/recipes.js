@@ -20,20 +20,18 @@ var loadIngredients = function(){
   });
 };
 
-function grabIngredients(array){
-  
+function grabIngredients(array){ 
   var names = [];
   var nameId = [];
   var orderIngredients = "<ul>";
+
   for (var i = 0; i < array.length; i++) {
     names.push(array[i]["name"]);
     nameId.push(array[i]["id"]);
-    orderIngredients += "<li class='ingredient'>" + nameId + ". " + names + "</li>";
   }
-  //for (var i = 0; i < nameId.length; i ++) {
-    
-  //  orderIngredients += "<li>" + nameId[i] + ". " + names + "</li>";
-  //}
+  for (var i = 0; i < nameId.length; i ++) {
+    orderIngredients += "<li>" + nameId[i] + ". " + names[i] + "</li>";
+  }
   $(".ingredients").html(orderIngredients);
 }
 
