@@ -6,17 +6,14 @@ $(document).ready(function(){
 });
 
 function loadIngredients(){
-  $("a.load_ingredients").on("click", function(e){
-    e.preventDefault();
-
-    $.ajax({
-      method: 'GET',
-      url: this.href,
-      dataType: 'json'
-    }).done(function(response){
-      $("a.load_ingredients").append(grabIngredients(response));
-    });   
-  });
+  debugger
+  $.ajax({
+    method: 'GET',
+    dataType: 'json'
+    url: '/recipes/' + recipe.id + '/ingredients'
+  }).done(function(response){
+    $("a.load_ingredients").append(grabIngredients(response));
+  });   
 };
 
 function grabIngredients(array){ 
@@ -74,9 +71,10 @@ function new_ingredients(){
     $.ajax({
       method: 'POST',
       url: this.action,
-      data: $(this).serialize()
+      data: $(this).serialize(),
+      dataType: 'json'
     }).done(function(response){
-      grabIngredients().append(response);
+      $(".ingredients").append(response["name"]);
       $("#ingredient_name").val("");
     });
   });
