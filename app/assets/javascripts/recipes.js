@@ -15,13 +15,27 @@ var loadIngredients = function(){
       url: this.href,
       dataType: 'json'
     }).done(function(response){
-      for (var i = 0; i < response.length; i++) {
-        
-        $("div.ingredients").html(response[i]["name"] )     
-      }
-    });
+      grabIngredients(response);
+    });   
   });
 };
+
+function grabIngredients(array){
+  
+  var names = [];
+  var nameId = [];
+  var orderIngredients = "<ul>";
+  for (var i = 0; i < array.length; i++) {
+    names.push(array[i]["name"]);
+    nameId.push(array[i]["id"]);
+    orderIngredients += "<li class='ingredient'>" + nameId + ". " + names + "</li>";
+  }
+  //for (var i = 0; i < nameId.length; i ++) {
+    
+  //  orderIngredients += "<li>" + nameId[i] + ". " + names + "</li>";
+  //}
+  $(".ingredients").html(orderIngredients);
+}
 
 
 var loadComments = function(){
