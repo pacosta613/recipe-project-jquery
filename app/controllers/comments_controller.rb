@@ -7,9 +7,9 @@ class CommentsController < ApplicationController
       @comments = @recipe.comments
 
       respond_to do |format|
-        format.html {render 'index.html'}
-        format.js {render 'index.js'}
-      end 
+        format.html {render :index}
+        format.js {render json: @comments}
+      end
     else
       @comments = Comment.all 
     end

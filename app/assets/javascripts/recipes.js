@@ -5,9 +5,8 @@ $(document).ready(function(){
   new_comments();
 });
 
-var loadIngredients = function(){
+function loadIngredients(){
   $("a.load_ingredients").on("click", function(e){
-    //debugger
     e.preventDefault();
 
     $.ajax({
@@ -15,7 +14,7 @@ var loadIngredients = function(){
       url: this.href,
       dataType: 'json'
     }).done(function(response){
-      grabIngredients(response);
+      $("a.load_ingredients").append(grabIngredients(response));
     });   
   });
 };
@@ -23,46 +22,62 @@ var loadIngredients = function(){
 function grabIngredients(array){ 
   var names = [];
   var nameId = [];
-  var orderIngredients = "<ul>";
+  var orderIngredients = "<ol>";
 
   for (var i = 0; i < array.length; i++) {
     names.push(array[i]["name"]);
     nameId.push(array[i]["id"]);
   }
-  for (var i = 0; i < nameId.length; i ++) {
-    orderIngredients += "<li>" + nameId[i] + ". " + names[i] + "</li>";
+  for (var i = 0; i < nameId.length; i++) {
+    orderIngredients += "<li>" + names[i] + "</li>";
   }
+  orderIngredients += "</ol>";
   $(".ingredients").html(orderIngredients);
 }
 
-
-var loadComments = function(){
+function loadComments(){
   $("a.load_comments").on("click", function(e){
     e.preventDefault();
 
     $.ajax({
       url: this.href,
-      dataType: 'script'
+      method: 'GET',
+      dataType: 'json'
+    }).success(function(response){
+      $("a.load_comments").append(grabComments(response));
     });
   });
-  //  $.get(this.href).success(function(response){
-  //    $("div.comments").html(response)
-  //  });
-}
+};
 
-var new_ingredients = function(){
+function grabComments(array) {
+  var commentId = [];
+  var comments = [];
+  var user = [];
+  var orderComments = "<ol>";
+  for (var i = 0; i < array.length; i++) {
+    commentId.push(array[i]["id"]);
+    comments.push(array[i]["content"]);
+    user.push(array[i].user["email"]);
+  }
+  for (var i = 0; i < commentId.length; i++){
+    orderComments += "<li>" + user[i] + " - " + comments[i] + "</li>";
+
+  }
+  orderComments += "</ol>";
+  $(".comments").html(orderComments);
+};
+
+function new_ingredients(){
   $("#new_ingredient").on("submit", function(e){
     e.preventDefault();
 
     $.ajax({
       method: 'POST',
       url: this.action,
-      data: $(this).serialize(),
-      type: ($("input[name='_method']").val() || this.method),
-      success: function(response){
-        var $ol = $("ingredients ol");
-        $ol.append(response);
-      }
+      data: $(this).serialize()
+    }).done(function(response){
+      grabIngredients().append(response);
+      $("#ingredient_name").val("");
     });
   });
 };
