@@ -67,6 +67,7 @@ function grabComments(array) {
 function new_ingredients(){
   $("#new_ingredient").on("submit", function(e){
     e.preventDefault();
+    
 
     $.ajax({
       method: 'POST',
@@ -74,7 +75,7 @@ function new_ingredients(){
       data: $(this).serialize(),
       dataType: 'json'
     }).done(function(response){
-      $(".ingredients li:last-child").append("<li>"+response["name"]+"</li>");
+      $(".ingredients").html("<li>"+response["name"]+"</li>");
       $("#ingredient_name").val("");
     });
   });
