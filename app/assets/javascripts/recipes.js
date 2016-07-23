@@ -67,7 +67,7 @@ function grabComments(array) {
 function new_ingredients(){
   $("#new_ingredient").on("submit", function(e){
     e.preventDefault();
-    
+
     $.ajax({
       method: 'POST',
       url: this.action,

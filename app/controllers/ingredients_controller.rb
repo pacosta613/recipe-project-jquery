@@ -21,6 +21,7 @@ class IngredientsController < ApplicationController
 
   def create
     @ingredient = @recipe.ingredients.create(ingredient_params)
+
     if @ingredient.save
 
       render json: @ingredient, status: 201
@@ -38,7 +39,7 @@ class IngredientsController < ApplicationController
   end
 
   def find_recipe
-    @recipe = Recipe.find_by(params[:recipe_id])
+    @recipe = Recipe.find(params[:id])
   end
 
 end
