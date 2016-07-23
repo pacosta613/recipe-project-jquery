@@ -6,14 +6,13 @@ $(document).ready(function(){
 });
 
 function loadIngredients(){
-  debugger
   $.ajax({
     method: 'GET',
-    dataType: 'json'
-    url: '/recipes/' + recipe.id + '/ingredients'
+    dataType: 'json',
+    url: document.URL
   }).done(function(response){
-    $("a.load_ingredients").append(grabIngredients(response));
-  });   
+    $("a.load_ingredients").append(grabIngredients(response.ingredients));
+  });
 };
 
 function grabIngredients(array){ 
@@ -67,14 +66,14 @@ function grabComments(array) {
 function new_ingredients(){
   $("#new_ingredient").on("submit", function(e){
     e.preventDefault();
-
+    
     $.ajax({
       method: 'POST',
       url: this.action,
       data: $(this).serialize(),
       dataType: 'json'
     }).done(function(response){
-      $(".ingredients").append(response["name"]);
+      $(".ingredients li:last-child").append("<li>"+response["name"]+"</li>");
       $("#ingredient_name").val("");
     });
   });

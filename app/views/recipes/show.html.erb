@@ -7,16 +7,13 @@
   
 </div><br>
 
-<%= form_for([@recipe, @ingredient]) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+  <%= form_for([@recipe, @ingredient]) do |f| %>
 
-  <!--%= collection_check_boxes :recipe, :ingredient_ids, Ingredient.all, :id, :name %-->
-  
-  <%= f.submit "Add Ingredient" %>
-<% end %>
-
-<!--%= button_to "Add Ingredients", new_recipe_ingredient_path(@recipe), method: 'get' %-->
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    
+    <%= f.submit "Add Ingredient" %>
+  <% end %>
 
 <%= button_to "Edit Recipe", edit_recipe_path(@recipe), method: 'get' %>  
 <%= button_to "Delete Recipe", "/recipes/#{@recipe.id}", method: 'delete' %>
