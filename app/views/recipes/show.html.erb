@@ -1,7 +1,6 @@
 <h1><%= @recipe.name.capitalize %></h1>
 
-<p><%= link_to "Load Ingredients", recipe_ingredients_path(@recipe), :class => "load_ingredients" %></p>
-<!--%= render 'ingredients/ingredients' %-->
+<h3>Ingredients:</h3>
 
 <div class="ingredients">
   
@@ -11,7 +10,7 @@
 
     <%= f.label :name %>
     <%= f.text_field :name %>
-    
+
     <%= f.submit "Add Ingredient" %>
   <% end %>
 
@@ -20,7 +19,6 @@
 
 <%= render 'comments/form' %>
 
-<!--%= render 'comments/comments' %-->
 <p><%= link_to "Load Comments", recipe_comments_path(@recipe), :class => "load_comments" %></p>
 
 <div class="comments">
