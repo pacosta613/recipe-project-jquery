@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
   end
   
   def create
-    @comment = Comment.create(comment_params)
+    @comment = @recipe.comments.create(comment_params)
     if @comment.save
 
       render json: @comment, status: 201
