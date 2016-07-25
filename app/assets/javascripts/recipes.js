@@ -27,7 +27,7 @@ function grabIngredients(data){
     nameId.push(ingredients[i]["id"]);
   }
   for (var i = 0; i < nameId.length; i++) {
-    debugger
+    
     orderIngredients += "<li>" + names[i] + "</li>";
   }
   orderIngredients += "</ol>";
