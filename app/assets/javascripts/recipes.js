@@ -6,26 +6,28 @@ $(document).ready(function(){
 });
 
 function loadIngredients(){
+  $('#recipe_ingredients').html('<h3>Ingredients:</h3>')
   $.ajax({
     method: 'GET',
     dataType: 'json',
     url: this.action
   }).done(function(response){
-    //grabIngredients(response.ingredients);
-    $("a.load_ingredients").append(grabIngredients(response.ingredients));
+    grabIngredients(response);
   });
 };
 
-function grabIngredients(array){ 
+function grabIngredients(data){ 
+  var ingredients = data["ingredients"];
   var names = [];
   var nameId = [];
   var orderIngredients = "<ol>";
   
-  for (var i = 0; i < array.length; i++) {
-    names.push(array[i]["name"]);
-    nameId.push(array[i]["id"]);
+  for (var i = 0; i < ingredients.length; i++) {
+    names.push(ingredients[i]["name"]);
+    nameId.push(ingredients[i]["id"]);
   }
   for (var i = 0; i < nameId.length; i++) {
+    debugger
     orderIngredients += "<li>" + names[i] + "</li>";
   }
   orderIngredients += "</ol>";
