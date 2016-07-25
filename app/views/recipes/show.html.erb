@@ -1,9 +1,7 @@
 <h1><%= @recipe.name.capitalize %></h1>
 
 <div id="recipe_ingredients"></div>
-<div class="ingredients" >
-  
-</div><br>
+<div class="ingredients"></div><br>
 
   <%= form_for([@recipe, @ingredient]) do |f| %>
 
@@ -13,11 +11,10 @@
     <%= f.submit "Add Ingredient" %>
   <% end %>
 
-<%= button_to "Edit Recipe", edit_recipe_path(@recipe), method: 'get' %>  
-<%= button_to "Delete Recipe", "/recipes/#{@recipe.id}", method: 'delete' %>
+<%= button_to "Edit Recipe", edit_recipe_path(@recipe), method: 'get' %>
+<%= button_to "Delete Recipe", "/recipes/#{@recipe.id}", method: 'delete' %><br>
 
 <%= render 'comments/form' %>
 
-<div class="comments">
-
-</div><br>  
+<div id="recipe_comments"></div>
+<div class="comments"></div><br>  
