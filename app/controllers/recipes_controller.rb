@@ -5,6 +5,11 @@ class RecipesController < ApplicationController
   def index
     @recipes = Recipe.all
     @recipe = Recipe.all.most_popular
+
+    respond_to do |f| 
+      f.html {render :index}
+      f.json {render json: @recipe}
+    end
   end
 
   def new

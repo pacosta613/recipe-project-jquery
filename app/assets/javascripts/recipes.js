@@ -1,100 +1,44 @@
 $(document).ready(function(){
+  grabLink();
+  Recipe();
   loadIngredients();
   loadComments();
   newIngredients();
   newComments();
 });
 
-function loadIngredients(){
-  $('#recipe_ingredients').html('<h3>Ingredients:</h3>')
-
-  $.ajax({
-    method: 'GET',
-    dataType: 'json',
-    url: this.action
-  }).done(function(response){
-    grabIngredients(response);
-  });
-};
-
-function grabIngredients(data){ 
-  var ingredients = data["ingredients"];
-  var names = [];
-  var nameId = [];
-  var orderIngredients = "<ol>";
-  
-  for (var i = 0; i < ingredients.length; i++) {
-    names.push(ingredients[i]["name"]);
-    nameId.push(ingredients[i]["id"]);
-  }
-  for (var i = 0; i < nameId.length; i++) {
-    orderIngredients += "<li>" + names[i] + "</li>";
-    
-  }
-  orderIngredients += "</ol>";
- $(".ingredients").html(orderIngredients);
+function Recipe(hash){
+  this.id = hash['id'];
+  this.name = hash['name'];
+  this.ingredients = hash['ingredients']
+  this.readMore = '<a href="/recipes/' + this.id + '" id="readMore">See Ingredients</a>'
 }
 
-function newIngredients(){
-  $("#new_ingredient").on("submit", function(e){
+function grabLink(){
+  $("#recipe").on("click", function(e){
     e.preventDefault();
+    var target = e["target"]["href"];
 
-    $.ajax({
-      method: 'POST',
-      url: this.action,
-      data: $(this).serialize(),
-      dataType: 'json'
-    }).done(function(response){
-      $(".ingredients ol").append("<li>" + response["name"] + "</li>");
-      $("#ingredient_name").val("");
+    $.getJSON (target + ".json", function(result){
+      handleReponse(result);
+      hideIngredients(result);
     });
-  });
-};
-
-function loadComments(){
-  $('#recipe_comments').html('<h3>Comments:</h3>');
-
-  $.ajax({
-    url: this.action,
-    method: 'GET',
-    dataType: 'json'
-  }).done(function(response){
-    grabComments(response);
   });
 }
 
-function grabComments(array) {
-  var comments = array["comments"];
-  var commentId = [];
-  var comment = [];
-  var users = [];
-  var orderComments = "<ol>";
-  
-  for (var i = 0; i < comments.length; i++) {
-    commentId.push(comments[i]["id"]);
-    comment.push(comments[i]["content"]);
-    users.push(comments[i].user["email"]);
+function handleReponse(result){
+  var recipe = new Recipe(result);
+  var hide = '<a href="#" id="hideMe">Hide Ingredients</a>';
+
+  $("p#recipe-" + recipe.id).html(recipe.listIngredients() + hide);
+}
+
+Recipe.prototype.listIngredients = function(){
+  var ingredientList = "<h4> Ingredients in this Recipe </h4><ol>"; 
+
+  for (var i = 0; i < this.ingredients.length; i++) {
+    ingredientList += "<li>" + this.ingredients[i].name + "</li>";
   }
-  for (var i = 0; i < commentId.length; i++){
-    orderComments += "<li>" + users[i] + " - " + comment[i] + "</li>";
-  }
-
-  orderComments += "</ol>";
-  $(".comments").html(orderComments);
-};
-
-function newComments(){
-  $("#new_comment").on("submit", function(e){
-    e.preventDefault();
-
-    $.ajax({
-      method: 'POST',
-      url: this.action,
-      data: $(this).serialize(),
-      dataType: 'json'
-    }).done(function(response){
-      $(".comments ol").append("<li>" + response.user["email"] + " - " + response["content"] + "</li>");
-      $("#comment_content").val("");
-    });
-  });
+  ingredientList += "</ol>"
+  return ingredientList;
 }
