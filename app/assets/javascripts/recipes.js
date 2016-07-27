@@ -1,17 +1,12 @@
 $(document).ready(function(){
   grabLink();
   Recipe();
-  loadIngredients();
-  loadComments();
-  newIngredients();
-  newComments();
 });
 
 function Recipe(hash){
   this.id = hash['id'];
   this.name = hash['name'];
   this.ingredients = hash['ingredients']
-  this.readMore = '<a href="/recipes/' + this.id + '" id="readMore">See Ingredients</a>'
 }
 
 function grabLink(){
@@ -21,7 +16,7 @@ function grabLink(){
 
     $.getJSON (target + ".json", function(result){
       handleReponse(result);
-      hideIngredients(result);
+      hideIngredients(result['id']);
     });
   });
 }
@@ -41,4 +36,12 @@ Recipe.prototype.listIngredients = function(){
   }
   ingredientList += "</ol>"
   return ingredientList;
+}
+
+function hideIngredients(id){
+  $('#hideMe').on("click", function(e){
+    e.preventDefault();
+    
+    $("p#recipe-" + id).hide();
+  });
 }
