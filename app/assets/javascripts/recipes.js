@@ -10,7 +10,7 @@ function Recipe(hash){
 }
 
 function grabLink(){
-  $("#recipe").on("click", function(e){
+  $("a#recipe").on("click", function(e){
     e.preventDefault();
     var target = e["target"]["href"];
 
@@ -42,6 +42,6 @@ function hideIngredients(id){
   $('#hideMe').on("click", function(e){
     e.preventDefault();
     
-    $("p#recipe-" + id).hide();
+    $("p#recipe-" + id).text("");
   });
 }
